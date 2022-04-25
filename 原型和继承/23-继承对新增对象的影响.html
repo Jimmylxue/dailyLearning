@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>继承对新增对象的影响</title>
+	</head>
+	<body>
+		<script>
+			function User() {}
+			User.prototype.show = function () {
+				console.log('User.show()')
+			}
+
+			function Admin() {}
+			let a = new Admin()
+			Admin.prototype.hello = function () {
+				console.log('aahello world')
+			}
+
+			console.log(Admin.prototype.__proto__ == Object.prototype) // true
+			console.log(User.prototype.__proto__ == Object.prototype) // true
+			Admin.prototype.__proto__ = User.prototype
+
+			a.show() // User.show()  先实例化后改变后继承任然能够获取
+			a.hello() // aahello world  先实例化后给构造函数添加属性 任然是可以获取构造函数的方法
+
+			function Member() {}
+			Member.prototype.hello = function () {
+				console.log('hello world')
+			}
+			let m2 = new Member()
+
+			Member.prototype = Object.create(User.prototype)
+			let m1 = new Member()
+			m2.hello() // hello world 因为是在实例化之前的操作
+			m2.show() // 一样也是报错 m2 是在继承前就初始化的对象， 这时候的原型指向还是原来的链条
+			m1.hello() // 报错  原有的原型方法丢失
+		</script>
+	</body>
+</html>

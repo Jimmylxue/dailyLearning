@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function load(src,reslove,reject){
+      let script = document.createElement('script')
+      script.src = src
+      script.onload = reslove
+      script.onerror = reject
+      document.body.appendChild(script)
+    }
+    load('./module/a.js',()=>{
+      aMode()
+    },()=>{
+      console.log('线程加载失败')
+    })
+    load('./module/b.js',()=>{
+      bMode()
+    })
+
+    // 回调地狱写法
+    load('./module/a.js',()=>{
+      // 只要走到这个回调里面，就说明一定时已经拿到了值
+      load('./module/b.js',()=>{
+
+      })
+    })
+    load('./')
+    console.log('主线程')
+  </script>
+</body>
+</html>

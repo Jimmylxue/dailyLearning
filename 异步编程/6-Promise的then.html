@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise的then</title>
+</head>
+<body>
+  <script>
+    new Promise((resolve,reject)=>{
+      resolve('请求成功1')
+    }).then(res=>{
+      return '请求成功'
+    },err=>{
+
+    }).then(res=>{
+      console.log('kkk',res)
+    })
+
+    // 执行结果 kkk 请求成功
+
+    new Promise((resolve,reject)=>{
+      resolve('请求成功1')
+    }).then(res=>{
+      return new Promise((resolve,reject)=>{
+        reject('失败了')
+      })
+    },err=>{
+
+    }).then(null,(err)=>{
+      console.log('失败的结果',err)
+    })
+    //6-Promise的then.html:31 失败的结果 失败了
+  </script>
+</body>
+</html>

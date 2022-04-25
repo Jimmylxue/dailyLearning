@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>__proto__原来是属性访问器</title>
+	</head>
+	<body>
+		<script>
+			let obj = {
+				name: 'jimmy',
+			}
+			obj.__proto__.show = function () {
+				console.log(this.name)
+			}
+			obj.show() // Jimmy
+
+			obj.__proto__ = 'hellp world'
+
+			obj.show() // Jimmy
+
+			/*
+        属性访问器
+      */
+			let objs = {
+				action: {},
+
+				get proto() {
+					return this.action
+				},
+
+				set proto(obj) {
+					if (obj instanceof Object) {
+						this.action = obj
+					}
+				},
+			}
+
+			objs.proto = 'hello world'
+
+			console.log(objs.proto)
+		</script>
+	</body>
+</html>

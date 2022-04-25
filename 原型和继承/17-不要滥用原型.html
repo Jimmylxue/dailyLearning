@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>不要滥用原型</title>
+	</head>
+	<body>
+		<button onclick="this.hide()">button</button>
+		<!-- 这里的 this 指向的就是调用这个方法的对象 也就是这个button按钮 本身没有的方法就会去原型上寻找方法 -->
+	</body>
+	<script>
+		// Object.prototype 所有元素最顶层的原型
+		Object.prototype.hide = function () {
+			console.log('hide方法已经触发')
+		}
+	</script>
+	<!-- 后加载的方法库如果和原型上的有一样方法名的 原来的就会被覆盖 -->
+	<script src="./17-不要滥用原型.js"></script>
+</html>

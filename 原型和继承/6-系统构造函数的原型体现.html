@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let arr = []
+    // let arr = [] 本质上是 let arr = new Array()
+    console.log(arr.__proto__==Array.prototype) // true
+
+    let str = ''
+    // let arr = [] 本质上是 let arr = new String()
+    console.log(str.__proto__ == String.prototype)
+
+    let reg = /a/i
+    // let arr = [] 本质上是 let arr = new RegExp()
+    console.log(reg.__proto__ == RegExp.prototype)
+
+    let num = 5
+    // let arr = [] 本质上是 let arr = new Number()
+    console.log(num.__proto__ == Number.prototype)
+
+    let bol = true
+    // let arr = [] 本质上是 let arr = new Boolean()
+    console.log(bol.__proto__ == Boolean.prototype)
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型关系详解</title>
+</head>
+<body>
+  <script>
+    let obj = new Object()
+    console.log('实例化的对象',obj)
+    console.dir(Object.prototype)
+    Object.prototype.show = ()=>{
+      console.log('顶级对象方法show')
+    }
+    // console.dir(Object.__proto__)
+    function User(){}
+    let Jimmy = new User()
+    console.dir(User)
+    console.log(User.prototype.__proto__ == Object.prototype) // true 说明 一切的原型最早都会来自与 顶级对象的构造器
+    console.log(Jimmy.__proto__.__proto__ == Object.prototype) // ture 说明 一切的原型最早都会来自与 顶级对象的构造器
+
+    /*
+      这样之后整个原型链就串起来了 一切的实例化对象 如 New String() New Array() 都是继承与 Object的构造函数
+    */
+  </script>
+</body>
+</html>

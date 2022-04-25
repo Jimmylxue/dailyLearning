@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise.race()请求超时处理</title>
+</head>
+<body>
+  <script>
+    function query(url,delay=3000){
+      let promise1 = axios.get(url)
+      let promise2 = new Promise((resolve,reject)=>{
+        setTimeout((resolve,reject) => {
+          reject('请求超时')
+        }, delay);
+      })
+      return Promise.race([promise1,promise2])
+    }
+    query('http://127.0.0.1:666').then(res=>{
+      console.log('请求结果',res)
+    }).catch(err=>{
+      console.log('请求超时了请重试')
+    })
+    /*
+      Promise.race() 传递一个数组  数组里面的Promise哪个快就会先执行哪个
+        这个非常好的可以用在判断是否请求超时的处理上
+    */
+  </script>
+</body>
+</html>

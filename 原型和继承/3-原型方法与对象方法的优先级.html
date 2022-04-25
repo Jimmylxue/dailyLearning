@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型方法与对象方法的优先级</title>
+</head>
+<body>
+  <script>
+    let obj = {}
+    try{  
+      obj.show()
+    }catch(err){
+      console.log(err.message) // obj.show is not a function
+      /*
+        对象自己没有这个方法 继承长辈叶没有这个方法 就会直接报错
+      */
+    }
+    let arr = []
+    arr.__proto__.showName = ()=>{
+      console.log('__propto__添加的方法') // __propto__添加的方法
+    }
+    arr.showName()
+    /*
+      自己没有的方法 会去找一遍原型 原型有就会直接执行
+    */
+
+    let brr = []
+    brr.showa = ()=>{
+      console.log('对象自己的方法')
+    }
+    brr.__proto__.showa = ()=>{
+      console.log('对象原型上面的方法')
+    }
+    brr.showa()  // 对象自己的方法
+    /*
+      对象执行方法的优先级  如果自己有就使用自己的方法，没有就一层一层找原型，找到了就使用原型的方法，没有找到就报错
+      简答的说就是 就近原则
+    */
+
+  </script>
+</body>
+</html>

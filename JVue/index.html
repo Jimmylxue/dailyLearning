@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="app">
+			<div>{{title}}</div>
+			<div v-show="showFlag">{{love}}</div>
+			<div>{{info.mark}}</div>
+			<div>v-show --- {{showFlag}}</div>
+			<div>
+				<div>请输入姓名：</div>
+				<input type="text" v-model="count" /><span>now:{{count}}</span>
+			</div>
+
+			<button v-on:click="changeName">改名</button>
+			<button @click="changeMark">改名2</button>
+			<button @click="changeShow">v-show</button>
+		</div>
+		<script>
+			let vm = null
+			setTimeout(() => {
+				vm = new jvue({
+					el: 'app',
+					data: {
+						title: 'hello',
+						love: 'xuexue',
+						showFlag: false,
+						count: 0,
+						info: {
+							mark: 90,
+						},
+					},
+					method: {
+						changeName() {
+							// console.log
+							this.title = 'Jimmy'
+							console.log('comming')
+						},
+						changeMark() {
+							this.info.mark = 99
+						},
+						changeShow() {
+							this.showFlag = !this.showFlag
+						},
+					},
+				})
+			}, 1000)
+		</script>
+	</body>
+</html>

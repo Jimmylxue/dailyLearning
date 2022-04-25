@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>任务轮询（回调函数）</title>
+</head>
+<body>
+  
+</body>
+<script>
+  function loadImage(src,reslove,reject){
+    const image = new Image()
+    image.src = src
+    // image.onload = reslove(src)
+    image.onload = ()=>{
+      reslove(image)
+    }
+    image.onerror = reject
+  }
+  loadImage('http://39.96.42.170/bg.jpg',(imageDom)=>{
+    console.log('图片加载成功了',imageDom)
+    document.getElementsByTagName('body')[0].appendChild(imageDom)
+  },()=>{
+    console.log('图片加载失败')
+  })
+  console.log('first','http://39.96.42.170')
+  /*
+    打印的顺序是 先打印 http://39.96.42.170  之后才打印 图片加载成功了或是图片加载失败
+      原因就是因为JS是单线程的  为了去掉等待的时候 JS是异步加载的  因为等待图片加载相对是一个耗时长的事情，而打印是直接打印的事情，  
+        所以回调函数这种都是异步执行的   JS会先执行主线程的逻辑代码 之后再去轮询任务队列
+  */
+</script>
+</html>

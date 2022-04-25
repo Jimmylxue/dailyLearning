@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型中contructor的引用</title>
+</head>
+<body>
+  <script>
+    // 原型中 constructor的引用
+    function User(){}
+    console.dir(User)
+    console.log(User.prototype.constructor == User) // ture
+    // 函数作为构造函数的时候 构造函数的.prototype原型的constructor构造函数指向的就是原来的User这个构造函数 相当于是一个简单的闭环
+  </script>
+</body>
+</html>

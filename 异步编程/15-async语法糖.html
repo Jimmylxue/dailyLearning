@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise语法糖</title>
+</head>
+<body>
+  <script>
+    async function promise(){}
+    console.log(promise()) //  Promise {<fulfilled>: undefined}  返回的默认是一个已完成状态的Promise 
+
+    async function Promise2(){
+      let res = await new Promise((resolve,reject)=>{
+        setTimeout(() => {
+          resolve('请求成功')
+        }, 2000);
+      })
+      /*
+        await 默认会返回一个 promise 就可以继续一直的 await 下去  虽然是本质上是异步 但是代码的执行顺序是同步执行的
+      */
+      let res2 = await new Promise((resolve,reject)=>{
+        setTimeout(() => {
+          resolve('请求成功2')
+        }, 2000);
+      })
+      console.log('结果',res2)
+    }
+
+    Promise2()
+
+    function normal(){
+    return Promise.resolve()
+}
+console.log(normal())
+  </script>
+</body>
+</html>

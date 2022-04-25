@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>async与await错误处理方式</title>
+</head>
+<body>
+  <script>
+    async function promise1(){
+      console.log(aaa)
+    }
+
+    promise1().catch(err=>{
+      console.log('错误原因',err.message)  //错误原因 aaa is not defined
+    })
+    /*
+      因为 加上async关键字之后 函数的返回值变成了一个promise， promise就可以使用catch来捕获错误
+    */
+
+    async function query(){
+      try {
+        let lesson = await axios.post('http://127.0.0.1:666')
+      } catch (error) {
+        console.log('await 错误原因',error.message)
+      }
+    }
+    query()
+    /*
+      await 内部监听错误就可以使用传统的 try-catch模块进行监听模块
+    */
+  </script>
+</body>
+</html>

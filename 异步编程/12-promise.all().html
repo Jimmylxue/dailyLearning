@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise.all()</title>
+</head>
+<body>
+  <script>
+    let promise1 = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        reject('失败1')
+      }, 1000);
+    }).then(null,(err)=>{
+      console.log('接收到了失败') 
+      // 因为对失败进行了处理 所以默认会返回一个成功状态的promise
+    })
+    let promise2 = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve('成功2')
+      }, 1000);
+    })
+
+    Promise.all([promise1,promise2]).then(res=>{
+      console.log('success',res)
+    }).catch(err=>{
+      console.log('error',err)
+    })
+    // success (2) ["成功1", "成功2"]
+
+    /*
+      知识点：
+        1. promise.all()参数是传递一个数组  -  这个数组每个成员都是一个Promise  
+          只有数组的Promise的状态都是成功的状态  才会走到成功的回调
+        2. Promise无论是成功的处理还是失败的处理 默认返回的都是一个成功的状态  
+    */
+  </script>
+</body>
+</html>

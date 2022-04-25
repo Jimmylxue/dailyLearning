@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型的初步认识</title>
+</head>
+<body>
+  <script>
+    let arr = ['Jimmy']
+    let brr = arr.concat('xuexue')
+    console.log(brr) // ["Jimmy", "xuexue"]
+    /*
+      我们并没有给 arr 数组添加concat方法 但是arr却可以正常的使用这个方法 原因：
+        arr的 __proto__ 原型 上有 concat 方法
+        __proto__就好比当前对象的父亲，  父亲的方法儿子是可以正常使用的
+    */
+
+    let crr = []
+    /*
+      Object.getPrototypeOf() 传递一个对象 可以获取到这个对象的原型
+      除此之外也是可以直接使用  对象.__proto__ 来获取对象的原型
+    */
+    console.log(Object.getPrototypeOf(brr))
+    console.log(brr.__proto__)
+    console.log(Object.getPrototypeOf(arr) == Object.getPrototypeOf(brr))
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>禁止controctor被遍历</title>
+	</head>
+	<body>
+		<script>
+			function User() {}
+			User.prototype.show = function () {
+				console.log('hello world')
+			}
+
+			function Admin() {}
+
+			Admin.prototype = Object.create(User.prototype)
+			Admin.prototype.name = function () {
+				console.log('hello name')
+			}
+			Object.defineProperty(Admin.prototype, 'constructor', {
+				value: Admin,
+				enumerable: false, // 是否可被遍历
+			})
+			let a = new Admin()
+			for (const key in a) {
+				// in 关键字遍历对象是会访问到原型的
+				if (a.hasOwnProperty(key)) console.log(key)
+			}
+		</script>
+	</body>
+</html>

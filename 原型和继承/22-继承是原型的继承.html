@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>继承是原型的继承</title>
+	</head>
+	<body>
+		<script>
+			function User() {}
+			User.prototype.show = function () {
+				console.log('原型方法')
+			}
+			console.log('kkk', User.prototype.__proto__ == Object.prototype)
+
+			function Admin() {}
+			Admin.prototype.__proto__ = User.prototype
+			let a = new Admin()
+			a.show() // 原型方法  可以正常的调用
+
+			Admin.prototype.role = function () {
+				console.log('Admin的role方法')
+			}
+
+			function Member() {}
+			Member.prototype = User.prototype
+			let m = new Member()
+			Member.prototype.role = function () {
+				console.log('Member的role方法')
+			}
+
+			a.role() // Admin的role方法
+		</script>
+	</body>
+</html>

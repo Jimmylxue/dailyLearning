@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>原型链检查instanceof</title>
+	</head>
+	<body>
+		<script>
+			function A() {}
+			let a = new A()
+			console.log(a instanceof Array) // false 函数的原型上是Object 并不是 Array 所以是false
+			// a instanceof b 检测 a对象上是否有构造函数b
+
+			function B() {}
+			let b = new B()
+			console.log(a instanceof B) // false
+			A.prototype = b // 将A的构造函数指向B，那么原来执行Object的链条就断了 改成b又因为b的构造函数指向的是B  所以a的构造函数原型链上就有B的构造函数
+			let a1 = new A()
+			console.log(a instanceof B)
+			console.log(a1 instanceof B) // true
+
+			// 在理解了前面的内容之后 就更好理解 为什么 instanceof 可以用来检测时数组还是对象了
+			let arr = []
+			let obj = []
+			console.log(arr instanceof Object) // true
+			console.log(arr instanceof Array) // true
+			console.log(obj instanceof Array) //  false
+		</script>
+	</body>
+</html>

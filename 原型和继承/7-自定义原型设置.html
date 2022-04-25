@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义原型设置</title>
+</head>
+<body>
+  <script>
+    let jimmy = {
+      name:'Jimmy'
+    }
+    let parent = {
+      name:'Father'
+    }
+    Object.setPrototypeOf(jimmy,parent)
+    console.log(jimmy)
+    /*
+      {name: "Jimmy"}
+        name: "Jimmy"
+        __proto__:
+        name: "Father"
+        __proto__:
+        constructor: ƒ Object()
+    */
+    // 使用 Object.setPrototypeOf(对象1,对象2) 给对象1的设置原型为对象2
+    console.log(Object.getPrototypeOf(jimmy))  //  {name: "Father"}
+
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise.allSettled()</title>
+</head>
+<body>
+  <script>
+    let promise1 = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        reject('失败了')
+      }, 1000);
+    })
+    let promise2 = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve('成功了')
+      }, 1000);
+    })
+    Promise.allSettled([promise1,promise2]).then(res=>{
+      console.log('最终的数据',res)
+      /*
+        (2) [{…}, {…}]
+            0: {status: "rejected", reason: "失败了"}
+            1: {status: "fulfilled", value: "成功了"}
+            length: 2
+            __proto__: Array(0)
+      */
+    })
+  </script>
+</body>
+</html>

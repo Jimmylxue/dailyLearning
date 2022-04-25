@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义错误处理</title>
+</head>
+<body>
+  <script src="./module/ajax.js"></script>
+  <script>
+    const arr = [1,2,3,4]
+    const obj = {name:'Jimmy',age:22}
+    console.log(typeof arr,typeof obj)  // 两者都是 object
+    console.log(arr instanceof Object,arr instanceof Array)  // true  true
+    console.log(obj instanceof Object,obj instanceof Array)  // true  false
+    /*
+      由此可见 Array是继承Object类的  object对象是通过实例化Object实现的 ，
+        所以我们呢可以通过 对象是否是通过 Array实例化出来的 来判断是否数组还是普通对象
+    */
+    ajax('https://jsonplaceholder.typicode.com/posts').then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      // instanceof 能够判断该对象对象是从哪个类实例出来的
+      /*
+        最典型的就是可以用来判断是对象还是数组
+      */
+      if(err instanceof ParamsError){
+        console.log(err)
+      }else if(err instanceof HttpError){
+        alert(err)
+      }
+    })
+  </script>
+</body>
+</html>

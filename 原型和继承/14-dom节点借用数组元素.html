@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>dom节点借用数组</title>
+	</head>
+	<body>
+		<button>Jimmy</button><button class="mylove">xuexue</button>
+		<script>
+			let btns = document.querySelectorAll('button')
+			console.log(btns) // 类数组 是节点数组  有用数组的基本特点 但是没有数组的方法
+
+			console.log(Array.prototype.filter == [].filter) // true 因为原型链的关系 两者本质上是相等的
+
+			btns = Array.prototype.filter.call(btns, item => {
+				// DOM.hasAttribute('class') // 判断某个dom是否含有指定的属性
+				return item.hasAttribute('class')
+			})
+			console.log(btns[0].innerHTML) // xuexue
+
+			/*
+        当掌握了 call 和 apply的方法之后 本质上就是在借用原型
+      */
+		</script>
+	</body>
+</html>

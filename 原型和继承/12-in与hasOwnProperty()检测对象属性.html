@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>in与hasOwnProperty检测对象属性</title>
+	</head>
+	<body>
+		<script>
+			let a = { name: 'Jimmy' }
+			let b = { age: 22 }
+			console.log('name' in a)
+			/*
+        a in b 检测 b对象上是否含有a属性 - - 注意是 in 关键字是会向上攀升到原型链的
+      */
+			Object.prototype.school = 'ykApp'
+			console.log('school' in a) // true  虽然 a对象本身上没有 school 属性  但是原型链上面其实是有的  结果会为true
+
+			/*
+        当我们只需要检测对象本身 并不需要检测原型链的时候  这时候的 in 关键字就不好用了  就需要使用 hasOwnProperty()来检测
+      */
+
+			console.log(a.hasOwnProperty('name')) // true  只会检测本身
+			console.log(a.hasOwnProperty('school')) // false
+
+			// 一般我们遍历  for in 一个对象本身的属性的时候  都是会配合上 hasOwnProperty()来使用的
+			for (const key in a) {
+				console.log(key) // name school  会将原型链上的对象也遍历出来
+			}
+
+			for (const key in a) {
+				if (a.hasOwnProperty(key)) {
+					console.log(key) // name  只遍历自身
+				}
+			}
+
+			// 在学了这个方法之后 判断一个对象是否有属性  就可以不用 if(a.b)来进行判断了 还更加的准确
+		</script>
+	</body>
+</html>

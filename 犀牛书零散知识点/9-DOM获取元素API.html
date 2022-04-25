@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="parent">
+			<!-- 这是注释 -->
+			<p>hello world</p>
+			<span class="Jimmy">Jimmy</span>
+			<span>xuexue</span>
+			晚上好
+			<p>2021/11/27</p>
+		</div>
+		<script>
+			/*
+        总结：
+          DOM 提供了强大的获取元素和节点的API
+          元素和节点的概念非常重要，也很容易搞混 过去我也一直是混乱的，但是现在好了
+          
+          元素： 简单的理解就是我们的DOM html的标签
+          节点： 节点是元素的父级 节点就包含元素节点 文本节点 注释节点等等
+
+          通过 nodeType 可以获取节点的类型
+            如： 
+              Document节点类型是 9 
+              Element节点类型是 1  
+              Text节点类型是 3
+              Comment节点类型是 8
+
+        DOM 提供了很像的两套API 来方便我们获取节点或元素，区分也是非常容易区分
+        如 还有Element的就是 获取元素的 API 没有的就是节点的API
+          如：firstElementChild 和 firstChild
+      */
+
+			/*
+        querySelector 会查找匹配到的第一个元素  如果某个选择器有多个 则会返回文档从上到下匹配到的第一个
+          如果要匹配多个 需要使用  querySelectorAll()
+      */
+			let parent = document.querySelector('.parent')
+			console.log(parent)
+			/*
+        DOM API
+          children ： 获取子元素 ！！ 元素！！！ 即是一个个DOM元素
+          childNodes ： 获取子节点 ！！ 节点！！  节点包含元素 除此之外还有文本节点 注释节点等等
+      */
+			console.log(parent.children) //  [p, span, span, p]
+			console.log(parent.childNodes) // [text, comment, text, p, text, span, text, span, text, p, text]
+			/*
+        firstElementChild: 获取第一个子元素
+        firstChild: 获取第一个子节点！！！！
+      */
+			console.log(parent.firstElementChild) // p
+			console.log(parent.lastElementChild) // p
+			console.log(parent.firstChild) // #Text
+			console.log(parent.lastChild) // #Text
+			/*
+        previousElementSibling nextElementSibling
+          前一个和后一个的元素
+        previousSibling nextSibling
+          前一个和后一个节点
+      */
+			let Jimmy = document.querySelector('.Jimmy')
+			console.log(Jimmy.previousElementSibling, Jimmy.nextElementSibling) // <p>hello world</p> <p>xuexue</p>
+			console.log(Jimmy.previousSibling, Jimmy.nextSibling) // #Text #Text
+		</script>
+	</body>
+</html>

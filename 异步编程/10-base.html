@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./9-fnc.js"></script>
+  <script>
+    timeout(2000)
+    .then(() => {
+      console.log('使用Promise')
+      return timeout(2000)
+    })
+    .then(() => {
+      console.log('封装的定时器')
+    })
+  </script>
+</body>
+</html>

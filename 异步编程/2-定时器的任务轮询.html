@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>定时器的任务轮询</title>
+  <style>
+    div{
+      width: 200px;
+      height: 200px;
+      background-color: skyblue;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+<script>
+  function interval(callback,delay){
+    let timeId = setInterval(()=>{
+      callback(timeId) // 通过异步的形式 将timeId 传递出去
+    },delay)
+  }
+
+  interval((timeId)=>{
+    const div = document.querySelector('div')
+    let left = div.offsetLeft
+    div.style.left = left + 10+'px'
+    console.log('left',left)
+    if(left+div.offsetWidth >= document.body.clientWidth){
+      clearInterval(timeId)
+      interval(timeId => {
+        let width = div.offsetWidth
+        div.style.width = width - 10 + 'px'
+        if(width <= 20){
+          clearInterval(timeId)
+        }
+      },100)
+    }
+  },50)
+</script>
+</html>

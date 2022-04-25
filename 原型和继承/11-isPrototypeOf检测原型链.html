@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>isPrototypeOf检测原型链</title>
+	</head>
+	<body>
+		<script>
+			/*
+        a.isPrototypeOf(b)  判断 a对象是否在b对象的原型链上 简单的理解就是a对象是否时b对象的长辈
+      */
+			let a = {}
+			let b = {}
+			let c = {}
+			let d = {}
+			console.log(a.isPrototypeOf(b)) // false
+			Object.setPrototypeOf(c, d) // 设置 c的原型链指向d
+			console.log(d.isPrototypeOf(c)) // true  d是否时c的长辈
+
+			/*
+        isPrototypeOf 和 之前学习的 instanceof 都是可以用来判断原型链的 区别在与 instanceof 时根据构造函数来判断 而 isPrototypeOf()是实打实的进行判断
+      */
+
+			console.log(Object.prototype.isPrototypeOf(a)) // true  a 的原型 执行的就是 Object.prototype 因为a本质上是 new Object()出来的
+		</script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>setPrototypeOf与getPrototypeOf替代__proto</title>
+	</head>
+	<body>
+		<script>
+			let base = {
+				show() {
+					console.log(this.name)
+				},
+			}
+
+			let jimmy = {
+				name: 'Jimmy',
+			}
+
+			Object.setPrototypeOf(jimmy, base)
+			jimmy.show() // jimmy
+
+			console.log(Object.getPrototypeOf(jimmy)) // Object show: ƒ show()
+		</script>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>使用call和apply借用原型</title>
+	</head>
+	<body>
+		<script>
+			let obj = {
+				data: [11, 23, 21, 67.87, 46],
+			}
+			Object.setPrototypeOf(obj, {
+				maxOf: function () {
+					console.log(this)
+					return this.data.sort((a, b) => b - a)[0]
+				},
+			})
+
+			let obj2 = {
+				lesson: {
+					js: 84,
+					php: 65,
+					node: 70,
+					css: 90,
+				},
+				get data() {
+					console.log('value', Object.values(this.lesson))
+					// Object 的原型方法 非常好用 传递一个对象  Object.keys(对象1) 将对象1的key组成对象返回  Object.values(对象1) 将对象1的值组成数组返回
+					return Object.values(this.lesson)
+				},
+			}
+			console.log(obj.maxOf.call(obj2))
+			/*
+        call 和 apply 都是用来改变this指向的， 传递的第一个参数就是就是 this所指向的对象
+      */
+			// console.log(obj.maxOf())
+		</script>
+	</body>
+</html>

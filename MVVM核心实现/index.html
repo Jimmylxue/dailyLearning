@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>MVVM</title>
+	</head>
+	<body>
+		<div id="app">
+			<div>你好{{title}}</div>
+		</div>
+		<script src="./observe.js"></script>
+		<script src="./compileTool.js"></script>
+		<script src="./compile.js"></script>
+		<script src="./watch.js"></script>
+		<script src="./dep.js"></script>
+		<script src="./index.js"></script>
+		<script>
+			const app = new MVVM({
+				el: 'app',
+				data: {
+					title: 'Hello World',
+				},
+				method: {},
+			})
+			console.log(app)
+		</script>
+	</body>
+</html>

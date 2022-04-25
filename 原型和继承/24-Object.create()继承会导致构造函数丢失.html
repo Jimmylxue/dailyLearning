@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Object.create()继承会导致controcutor丢失</title>
+	</head>
+	<body>
+		<script>
+			function User() {}
+			User.prototype.show = function () {
+				console.log('hello wolrd')
+			}
+
+			function Admin() {}
+			Admin.prototype = Object.create(User.prototype)
+			let a = new Admin()
+			console.dir(a) // Admin __proto__: User,
+			console.log(a.constructor) // function User() {} dir中没有值 但是打印有 这是因为这个构造函数拿的是父亲的构造函数
+
+			function Member() {}
+			Member.prototype = Object.create(User.prototype)
+			Member.prototype.constructor = Member
+			let m = new Member()
+			console.dir(m) // Member __proto__: User constructor: ƒ Member() __proto__: Object
+			console.log(m.constructor) // function Member() {}  正常能够获取到构造函数了
+
+			// 所以在继承的时候 一定要记住要处理一下 constructor 构造函数
+		</script>
+	</body>
+</html>

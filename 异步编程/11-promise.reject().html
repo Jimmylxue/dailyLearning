@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>promise.reject()</title>
+</head>
+<body>
+  <script>
+    new Promise((reslove,reject)=>{
+      reslove('成功a')
+    }).then(res=>{
+      if(res!='成功'){
+        throw new Error('不为成功！')
+      }
+    }).catch(err=>{
+      console.log('anser1',err)
+    })
+
+    new Promise((resolve,reject)=>{
+      resolve('成功b')
+    }).then(res=>{
+      if(res!='成功'){
+        return Promise.reject('不为成功')
+      }
+    }).catch(err=>{
+      console.log('anser2',err)
+    })
+  </script>
+</body>
+</html>

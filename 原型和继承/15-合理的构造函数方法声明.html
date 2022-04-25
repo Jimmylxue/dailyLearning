@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>合理的构造函数方法声明</title>
+	</head>
+	<body>
+		<script>
+			function User(name) {
+				this.name = name
+				this.show = function () {
+					console.log(this.name)
+				}
+			}
+
+			let Jimmy = new User('Jimmy')
+			let xuexue = new User('xuexue')
+
+			console.log(Jimmy)
+			/*
+        User {name: "Jimmy", show: ƒ}
+        name: "Jimmy"
+        show: ƒ ()
+      */
+			console.log(xuexue)
+			/*
+        User {name: "xuexue", show: ƒ}
+        name: "xuexue"
+        show: ƒ ()
+      */
+			//  打印之后发现两个实例化出来的对象都含有相同的 方法  这个本质上其实是有造成资源的浪费的  所以这种本质上是应该放在原型链上进行操作
+			function User2(name) {
+				this.name = name
+			}
+			User2.prototype.show = function () {
+				console.log(this.name)
+			}
+			let xiaotu = new User2('xiaotu')
+			let xiaojie = new User2('xiaojie')
+			console.log(xiaotu) // User2 {name: "xiaotu"}
+			console.log(xiaojie) // User2 {name: "xiaojie"}
+
+			xiaotu.show() // xiaotu
+			xiaojie.show() // xiaojie
+		</script>
+	</body>
+</html>

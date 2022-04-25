@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    new Promise((resolve,reject)=>{
+      resolve('操作成功')
+    }).then(()=>{
+      console.log('成功的回调1')
+    },()=>{
+      console.log('失败的回调')
+    }).then(()=>{
+      console.log('成功的回调2')
+    })
+  </script>
+</body>
+</html>

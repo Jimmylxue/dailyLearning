@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>改变构造函数原型不叫继承</title>
+	</head>
+	<body>
+		<script>
+			function User() {}
+			User.prototype.show = function () {
+				console.log('原型方法')
+			}
+
+			function Admin() {}
+			Admin.prototype = User.prototype
+			let a = new Admin()
+			a.show() // 原型方法  可以正常的调用
+
+			Admin.prototype.role = function () {
+				console.log('Admin的role方法')
+			}
+
+			function Member() {}
+			Member.prototype = User.prototype
+			let m = new Member()
+			Member.prototype.role = function () {
+				console.log('Member的role方法')
+			}
+
+			a.role() // Member的role方法
+			/*
+        打印的结果并不是我们想要的  Admin的role方法
+      */
+		</script>
+	</body>
+</html>

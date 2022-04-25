@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>margin-top无效果的情况</title>
+  <style>
+    /* 
+      事件起因： 当 parent 内部  children前面无内容的情况下 给children设置margintop会出现无效果的情况
+    */
+    /* 
+      要实现一个效果有很多种方式，当给子元素设置margin-top失效的时候，可以给父元素设置padding-top也可以实现这个效果
+      如果就想在margin-top层面解决问题，可以给父元素的 dispaly设置 flex||inline-block||table-cell  即可解决这种情况
+    */
+    .parent{
+      width: 300px;
+      height: 200px;
+      background-color: skyblue;
+      /* display: flex; */
+      /* display: inline-block; */
+      /* display: table-cell; */
+      /* padding-top: 100px; */
+    }
+    .children{
+      width: 100px;
+      height: 50px;
+      background-color: red;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 当 parent 内部  children前面无内容的情况下 给children设置margintop会出现无效果的情况 -->
+  <div class="parent">
+    <!-- 内容 -->
+    <div class="children"></div>
+  </div>
+</body>
+</html>

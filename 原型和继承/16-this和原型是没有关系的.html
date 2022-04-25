@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>this和原型是没有关系的</title>
+	</head>
+	<body>
+		<script>
+			let obj1 = {
+				name: 'Jimmy',
+				show() {
+					console.log(this.name)
+				},
+			}
+
+			obj1.show() // Jimmy
+
+			Object.setPrototypeOf(obj1, {
+				name: 'xuexueaaa',
+				show() {
+					console.log(this.name)
+				},
+			})
+			console.log(obj1) // 此时的原型上有一个name属性 是xuexueaaa  并且也有show方法
+			obj1.show() //Jimmy
+
+			let obj2 = {
+				name: 'Js',
+			}
+			Object.setPrototypeOf(obj2, {
+				show() {
+					console.log(this.name)
+				},
+			})
+			obj2.show() // JS  此时更绝  对象本身没有这个方法  访问到的是原型上的方法  但是这时候的this指向的还是要调用这个方法的对象
+
+			/*
+        总结： this的指向和原型链是没有关系的
+      */
+		</script>
+	</body>
+</html>
