@@ -11,7 +11,7 @@
 	type Other = Partial<Person>
 
 	/**
-	 * user 是 Other 类型  Other 是经过 Partial 处理过的 Perosn
+	 * user 是 Other 类型  Other 是经过 Partial 处理过的 Person
 	 *  所以 Other是 Person 类型 所有属性都转为可选之后的类型
 	 */
 	let user: Other = {
