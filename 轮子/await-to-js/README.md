@@ -1,6 +1,8 @@
-# await-to-js
+# mini-await-to-js
 
-> `async await`语法糖在现如今的开发中几乎已经是必用的一个API了，使用它可以让我们使用同步的方式来编写我们异步的代码，非常的好用！
+源码：[传送门](https://github.com/Jimmylxue/dailyLearning/tree/master/%E8%BD%AE%E5%AD%90/await-to-js)
+
+> `async await`语法糖在现如今的开发中几乎已经是必用的一个 API 了，使用它可以让我们使用同步的方式来编写我们异步的代码，非常的好用！
 
 虽然`async await`非常的给力，但是还是有能够继续优化和进步的空间，其中之一就是其相对比较鸡肋的错误处理，过去只能是在外层嵌套`try-catch`，如果涉及连锁的操作，就可能会出现比较难看的代码，也相对不好维护。
 
@@ -12,7 +14,7 @@ const getInfo = async () => {
 		let res = await getPageInfo()
 		console.log('成功了', res)
 	} catch (error) {
-		console.error(error,'错误了')
+		console.error(error, '错误了')
 	}
 }
 ```
@@ -36,7 +38,7 @@ const getInfo = async () => {
 }
 ```
 
-##  使用await-to-js
+## 使用 await-to-js
 
 ```js
 import { to } from './await-to-js.js'
@@ -55,14 +57,14 @@ const getInfo = async () => {
 ```js
 const getInfo = async () => {
 	const [err, page] = await to(getPageInfo())
-    if(!err){
-        const [err, banner] = await to(getBannerInfo({id:page.id}))
-        if(err){
-            doBannerError()
-        }
-    }else{
-        doPageError()
-    }
+	if (!err) {
+		const [err, banner] = await to(getBannerInfo({ id: page.id }))
+		if (err) {
+			doBannerError()
+		}
+	} else {
+		doPageError()
+	}
 }
 ```
 
@@ -74,17 +76,17 @@ const getInfo = async () => {
 /**
  *
  * @param {Promise} promise
- * @param {Function} errHandle
+ * @param {object} errMessage
  * @returns
  */
-export const to = (promise, errHandle) => {
+export const to = (promise, errMessage) => {
 	return promise
 		.then(res => {
 			return [null, res]
 		})
 		.catch(err => {
-			if (errHandle) {
-				const parserError = Object.assign({}, err, errHandle)
+			if (errMessage) {
+				const parserError = Object.assign({}, err, errMessage)
 				return [parserError, undefined]
 			}
 			return [err, undefined]
@@ -92,5 +94,4 @@ export const to = (promise, errHandle) => {
 }
 ```
 
-虽然只有几十行，但是这是一个非常稳健的库，在github上搜索 `await-to-js` 是可以搜索到的，有将近2.5K的star，所以有时候一个优秀的库跟代码里的多少还真没有强绑定关系！
-
+虽然只有几十行，但是这是一个非常稳健的库，在 github 上搜索 `await-to-js` 是可以搜索到的，有将近 2.5K 的 star，所以有时候一个优秀的库跟代码里的多少还真没有强绑定关系！
