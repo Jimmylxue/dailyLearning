@@ -1,0 +1,31 @@
+*{
+  box-sizing: border-box;
+}
+.area{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #1abc9c;
+  padding: 5px 8px;
+  margin-bottom: 5px;
+}
+
+.coupon{
+  
+}
+.coupon>div:nth-child(2){
+  color: gray;
+  font-size: 12px;
+}
+
+.btn{
+  /* width: 100px; */
+  background-color: #2ecc71;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 5px;
+  /* width: 80px; */
+  max-width: 80px;
+  min-width: 80px;
+}
