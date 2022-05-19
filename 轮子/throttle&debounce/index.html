@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>防抖和节流</title>
+		<style>
+			div {
+				width: 100%;
+				height: 2000px;
+				background-color: #2ecc71;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<script src="./debounce.js"></script>
+		<script src="./throttle.js"></script>
+		<script>
+			// const div = document.querySelector('div')
+			const body = document.body
+			let timer = null
+			// const ScrollFn = () => {
+			// 	console.log('scroll by debounce!')
+			// }
+			// body.onscroll = debounce(ScrollFn, 500)
+			const ScrollFn2 = () => {
+				console.log('scroll by throttle!')
+			}
+			body.onscroll = throttle(ScrollFn2, 1000)
+		</script>
+	</body>
+</html>
